@@ -69,8 +69,8 @@ else if (TempData["ErrorMessage"] != null)
                 @Html.DisplayFor(modelItem => item.Remarks)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-primary" }) &nbsp;&nbsp;
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { @class = "btn btn-success" })&nbsp;&nbsp;
                 @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger" })
             </td>
         </tr>

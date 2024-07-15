@@ -67,21 +67,38 @@ namespace CurdProduct.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var products= _productDAL.GetProductById(id).FirstOrDefault();
+            if (products == null)
+            {
+                TempData["InfoMessage"]="Product not available with id" +id.ToString();
+                return RedirectToAction("Index");
+            }
+            return View(products);
         }
 
         // POST: Product/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [HttpPost,ActionName("Edit")]
+        public ActionResult UpdateProduct(Product product)
         {
             try
             {
-                // TODO: Add update logic here
-
+                if (ModelState.IsValid)
+                {
+                    bool isUpdate = _productDAL.UpdateProduct(product);
+                    if (isUpdate)
+                    {
+                        TempData["SuccessMessage"] = "Product detailes Save Successful";
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Product is already avilable";
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
+                TempData["ErrorMessage"] = ex.Message;
                 return View();
             }
         }
